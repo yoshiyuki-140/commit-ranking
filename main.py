@@ -4,7 +4,8 @@ from datetime import datetime
 # 複数のリポジトリURL
 # 形式 : "https://github.com/ユーザー名/リポジトリ名1",
 repos = {
-    # 凡例 -> リポジトリURL : チーム名
+    # {チーム名}
+    # {リポジトリURL} : {チーム名}
     # ------------------------------
     # パモ
     "https://github.com/Yukkin395/hackit_terayuki": "パモ",
