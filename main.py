@@ -61,4 +61,4 @@ sorted_commit_counts = sorted(commit_counts.items(), key=lambda x: x[1], reverse
 
 
 for rank, (team, count) in enumerate(sorted_commit_counts, start=1):
-    pprint(rank, team, count)
+    print(f"{rank}", f"team:{team}", f"{count}コミット", sep="/", end="\n")
