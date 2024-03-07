@@ -1,7 +1,5 @@
 import requests
-from pprint import pprint
 from datetime import datetime
-import pickle
 
 # 複数のリポジトリURL
 # 形式 : "https://github.com/ユーザー名/リポジトリ名1",
