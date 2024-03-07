@@ -28,6 +28,7 @@ repos = {
 }
 
 # 特定期間の設定
+# datetime(年, 月, 日, 時, 分, 秒)
 since = datetime(2024, 3, 2, 0, 0, 0).isoformat() + "Z"  # ISO8601フォーマット
 until = datetime(2024, 3, 19, 0, 0, 0).isoformat() + "Z"
 
