@@ -6,8 +6,8 @@ import pickle
 # 複数のリポジトリURL
 # 形式 : "https://github.com/ユーザー名/リポジトリ名1",
 repos = {
-    # チーム名
-    # リポジトリURL
+    # 凡例 -> リポジトリURL : チーム名
+    # ------------------------------
     # パモ
     "https://github.com/Yukkin395/hackit_terayuki": "パモ",
     # 味玉
