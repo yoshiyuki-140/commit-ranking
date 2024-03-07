@@ -2,7 +2,7 @@ import requests
 from datetime import datetime
 
 # 複数のリポジトリURL
-# 形式 : "https://github.com/ユーザー名/リポジトリ名1",
+# 形式 : "https://github.com/ユーザー名/リポジトリ名",
 repos = {
     # {チーム名}
     # {リポジトリURL} : {チーム名}
