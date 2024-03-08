@@ -1,7 +1,8 @@
 # commit-ranking
 hackit vol2 commit ranking 
 
-- 以下のshellの表記はPowerShellの表記です
+> [!IMPORTANT]
+> 以下のshellの表記はPowerShellの表記です
 
 # 使い方
 
@@ -38,8 +39,8 @@ hackit vol2 commit ranking
         API_TOKEN = "{ghpから始まるアクセストークン}"
         ```
 
-    > [!NOTE]
-    > 権限は基本的に`repo`のみで良い
+> [!NOTE]
+> 権限は基本的に`repo`のみで良い
 
 
 3. `main.py`を実行する
