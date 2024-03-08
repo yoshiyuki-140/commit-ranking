@@ -1,5 +1,6 @@
 # commit-ranking
-hackit-vol2 コミット数集計用
+- hackit-vol2
+- コミット数集計用Pythonスクリプト
 
 > [!IMPORTANT]
 > 以下shellの表記はPowerShellの表記です
