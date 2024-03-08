@@ -1,8 +1,8 @@
 # commit-ranking
-hackit vol2 commit ranking 
+hackit-vol2 コミット数集計用
 
 > [!IMPORTANT]
-> 以下のshellの表記はPowerShellの表記です
+> 以下shellの表記はPowerShellの表記です
 
 # 使い方
 
