@@ -1,5 +1,6 @@
-import requests
+import os, requests
 from datetime import datetime
+from dotenv import load_dotenv
 
 # 複数のリポジトリURL
 # 形式 : "https://github.com/ユーザー名/リポジトリ名",
@@ -33,32 +34,74 @@ since = datetime(2024, 3, 2, 0, 0, 0).isoformat() + "Z"  # ISO8601フォーマ�
 until = datetime(2024, 3, 19, 0, 0, 0).isoformat() + "Z"
 
 
-# GitHub APIを使ってコミット数を取得する関数
-def get_commit_count(repo_url, since, until):
-    # リポジトリのGitHub API URLを構築
-    repo_name = repo_url.replace("https://github.com/", "")
-    api_url = (
-        f"https://api.github.com/repos/{repo_name}/commits?since={since}&until={until}"
+# GitHubアクセストークン
+# 環境変数のセッティング
+load_dotenv()
+access_token = os.environ["API_TOKEN"]
+
+# GraphQLエンドポイント
+endpoint = "https://api.github.com/graphql"
+
+
+# 特定期間の設定
+since = datetime(2023, 1, 1, 0, 0, 0).isoformat() + "Z"  # ISO8601フォーマット
+until = datetime(2024, 3, 19, 0, 0, 0).isoformat() + "Z"
+
+headers = {"Authorization": f"bearer {access_token}"}
+
+
+def convert_repo_format(original_repos):
+    """辞書の形式を変換する関数"""
+    new_repos = {}
+    for url, team_name in original_repos.items():
+        # URLからユーザー名/リポジトリ名を抽出
+        _, user_repo = url.split("github.com/")
+        # 新しい辞書にチーム名とユーザー名/リポジトリ名をセット
+        new_repos[team_name] = user_repo
+    return new_repos
+
+
+def get_commit_count(repo, since, until):
+    """各リポジトリのコミット数を取得する関数"""
+    owner, name = repo.split("/")
+    query = """
+    query($owner: String!, $name: String!, $since: GitTimestamp!, $until: GitTimestamp!) {
+      repository(owner: $owner, name: $name) {
+        defaultBranchRef {
+          target {
+            ... on Commit {
+              history(since: $since, until: $until) {
+                totalCount
+              }
+            }
+          }
+        }
+      }
+    }
+    """
+    variables = {"owner": owner, "name": name, "since": since, "until": until}
+    response = requests.post(
+        endpoint, json={"query": query, "variables": variables}, headers=headers
     )
-
-    # GitHub APIを呼び出し
-    response = requests.get(api_url)
-
-    # レスポンスからコミット数を取得
     if response.status_code == 200:
-        return len(response.json())
+        data = response.json()
+        return data["data"]["repository"]["defaultBranchRef"]["target"]["history"][
+            "totalCount"
+        ]
     else:
-        return 0
+        raise Exception(f"status code: {response.status_code}, {response.text}")
 
 
-# 各リポジトリのコミット数を取得し、チーム名と組み合わせて辞書に格納
+# 複数のリポジトリURL
+# {チーム名} : {ユーザー名/リポジトリ名}の形式に変換
+repos = convert_repo_format(repos)
+
 commit_counts = {
-    team: get_commit_count(repo, since, until) for repo, team in repos.items()
+    team: get_commit_count(repo, since, until) for team, repo in repos.items()
 }
 
 # コミット数でソートし、ランキングを出力
 sorted_commit_counts = sorted(commit_counts.items(), key=lambda x: x[1], reverse=True)
-
 
 for rank, (team, count) in enumerate(sorted_commit_counts, start=1):
     print(f"{rank}", f"team:{team}", f"{count}コミット", sep="/")
