@@ -30,10 +30,11 @@ hackit vol2 commit ranking
 
     1. 項目[Note]に使用目的を簡単に記述する
     2. 項目[Expiration]にtokenの有効期限を設定する
-    3. 項目[Select scopes]にで権限を設定する
+    3. 項目[Select scopes]に権限を設定する
     4. [Generate token]をクリックし、アクセストークンを取得する
     5. 取得したアクセストークンを、先ほど作成した`.env`ファイルに記述する
         ```text:.env
+        # .envファイルの中身
         API_TOKEN = "{ghpから始まるアクセストークン}"
         ```
 
