@@ -11,7 +11,13 @@ hackit-vol2 コミット数集計用
     git clone https://github.com/yoshiyuki-140/commit-ranking.git
     ```
 
-2. main.pyと同階層に`.env`ファイルを作成しておく。
+1. 必要なモジュールのインストール
+    ```shell
+    cd commit-ranking # main.pyと同階層に移動
+    pip install -r requirements.txt
+    ```
+
+1. main.pyと同階層に`.env`ファイルを作成しておく。
     - ファイル作成後のディレクトリ構造
         ```
         > tree /f
@@ -43,7 +49,7 @@ hackit-vol2 コミット数集計用
 > 権限は基本的に`repo`のみで良い
 
 
-3. `main.py`を実行する
+1. `main.py`を実行する
     ```shell
     python main.py
     ```
