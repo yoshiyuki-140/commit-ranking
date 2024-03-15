@@ -43,10 +43,6 @@ access_token = os.environ["API_TOKEN"]
 endpoint = "https://api.github.com/graphql"
 
 
-# 特定期間の設定
-since = datetime(2023, 1, 1, 0, 0, 0).isoformat() + "Z"  # ISO8601フォーマット
-until = datetime(2024, 3, 19, 0, 0, 0).isoformat() + "Z"
-
 headers = {"Authorization": f"bearer {access_token}"}
 
 
