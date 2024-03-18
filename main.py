@@ -23,7 +23,8 @@ repos = {
     # タイポ戦隊
     "https://github.com/Sakauchi444/argut_ai": "タイポ戦隊",
     # スマプロ
-    "https://github.com/NonokaM/hackit-vol2-smapro": "スマプロ",
+    # ["https://github.com/NonokaM/hackit-vol2-smapro",
+    #  "https://github.com/Mayu0628/hackit-vol2-smapro-api"]: "スマプロ",
     # 野良猫
     "https://github.com/Hackit-Nora-2024/KIT-Board": "野良猫",
 }
@@ -88,6 +89,15 @@ def get_commit_count(repo, since, until):
         raise Exception(f"status code: {response.status_code}, {response.text}")
 
 
+# スマプロカウント用の関数
+def sumapro_count(repos, since, until):
+    """スマプロのコミット数を合計する関数"""
+    count = 0
+    for repo in repos:
+        count += get_commit_count(repo, since, until)
+    return count
+
+
 # 複数のリポジトリURL
 # {チーム名} : {ユーザー名/リポジトリ名}の形式に変換
 repos = convert_repo_format(repos)
@@ -95,6 +105,14 @@ repos = convert_repo_format(repos)
 commit_counts = {
     team: get_commit_count(repo, since, until) for team, repo in repos.items()
 }
+
+# スマプロのコミット数を追加
+sumapro_repos = [
+    "Mayu0628/hackit-vol2-smapro",
+    "NonokaM/hackit-vol2-smapro-api",
+]
+
+commit_counts["スマプロ"] = sumapro_count(sumapro_repos, since, until)
 
 # コミット数でソートし、ランキングを出力
 sorted_commit_counts = sorted(commit_counts.items(), key=lambda x: x[1], reverse=True)
