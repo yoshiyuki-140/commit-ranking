@@ -11,15 +11,15 @@ repos = {
     # パモ
     "https://github.com/Yukkin395/hackit_terayuki": "パモ",
     # 味玉
-    "https://github.com/hamanakayuya/ajitama": "味玉",
+    # "https://github.com/hamanakayuya/ajitama": "味玉",
     # s3cprj
     "https://github.com/s3cprj/mega-evolution": "s3cprj",
     # 天丼
     "https://github.com/elca-hub/hackit_2024": "天丼",
     # CDA
-    "https://github.com/HIROMU522/AnzenNavi": "CDA",
+    # "https://github.com/HIROMU522/AnzenNavi": "CDA",
     # 頑張りたいと感じている
-    "https://github.com/HANABUSAHayato/AWS": "頑張りたいと感じている",
+    # "https://github.com/HANABUSAHayato/AWS": "頑張りたいと感じている",
     # タイポ戦隊
     "https://github.com/Sakauchi444/argut_ai": "タイポ戦隊",
     # スマプロ
