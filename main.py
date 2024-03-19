@@ -13,7 +13,7 @@ repos = {
     # 味玉
     # "https://github.com/hamanakayuya/ajitama": "味玉",
     # s3cprj
-    "https://github.com/s3cprj/mega-evolution": "s3cprj",
+    # "https://github.com/s3cprj/mega-evolution": "s3cprj",
     # 天丼
     "https://github.com/elca-hub/hackit_2024": "天丼",
     # CDA
@@ -32,7 +32,7 @@ repos = {
 # 特定期間の設定
 # datetime(年, 月, 日, 時, 分, 秒)
 since = datetime(2024, 3, 2, 0, 0, 0).isoformat() + "Z"  # ISO8601フォーマット
-until = datetime(2024, 3, 19, 0, 0, 0).isoformat() + "Z"
+until = datetime(2024, 3, 19, 10, 0, 0).isoformat() + "Z"
 
 
 # GitHubアクセストークン
@@ -89,8 +89,8 @@ def get_commit_count(repo, since, until):
         raise Exception(f"status code: {response.status_code}, {response.text}")
 
 
-# スマプロカウント用の関数
-def sumapro_count(repos, since, until):
+# 複数のリポジトリのコミット数を合計する関数
+def commit_count_multi_repos(repos, since, until):
     """スマプロのコミット数を合計する関数"""
     count = 0
     for repo in repos:
@@ -111,8 +111,18 @@ sumapro_repos = [
     "Mayu0628/hackit-vol2-smapro",
     "NonokaM/hackit-vol2-smapro-api",
 ]
+commit_counts["スマプロ"] = commit_count_multi_repos(sumapro_repos, since, until)
 
-commit_counts["スマプロ"] = sumapro_count(sumapro_repos, since, until)
+# セキプロのコミット数を追加
+
+s3cprj_repos = [
+    "s3cprj/mega-evolution",
+    "s3cprj/Utils",
+    "s3cprj/nakaya-model",
+    "s3cprj/nakaya-model-2",
+]
+
+commit_counts["s3cprj"] = commit_count_multi_repos(s3cprj_repos, since, until)
 
 # コミット数でソートし、ランキングを出力
 sorted_commit_counts = sorted(commit_counts.items(), key=lambda x: x[1], reverse=True)
